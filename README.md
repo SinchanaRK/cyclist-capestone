@@ -7,6 +7,7 @@ The goals to strategize converting casual riders into annual members
 Understand how annual members and casual riders differ
 Analyzing the Cyclistic historical bike trip data to identify trends
 Design a new marketing strategy to convert casual riders into annual members
+
 📜 Library Used
 install.packages("tidyverse")
 install.packages("dplyr")
@@ -17,6 +18,7 @@ library(tidyverse)
 library(lubridate)
 library(ggplot2)
 library(dplyr)
+
 ℹ️ Data Source
 Link to Datasets
 It's size are >25 MB so i can't upload it here
@@ -46,45 +48,52 @@ ride_ctg
 member_cat
 table(master_trip$rideable_type)
 table(master_trip$member_casual)
+
 Adding date, day, month, year, day of week column
 master_trip$date <- as.Date(master_trip$started_at) 
 master_trip$day <- format(as.Date(master_trip$started_at), "%d") 
 master_trip$month <- format(as.Date(master_trip$started_at), "%m")
 master_trip$year <- format(as.Date(master_trip$started_at), "%Y") 
 master_trip$day_of_week <- format(as.Date(master_trip$started_at), "%A") 
+
 Adding ride length in minutes column
 master_trip$ride_length_mins <- difftime(master_trip$ended_at, master_trip$started_at, units = "mins")
 master_trip$ride_length_mins <- as.numeric(as.character(master_trip$ride_length_mins))
+
 Bad Data Removal
 Keeping the old data frame and creating a new data frame filled with cleaned data
-
 master_trip_2 <- master_trip[!(master_trip$ride_length<=0),]
 sum(master_trip$ride_length<=0)
 sum(master_trip_2$ride_length<=0)
 sum(master_trip$ride_length>=1440)
 master_trip_2 <- master_trip_2[!(master_trip_2$ride_length>=1440),]
 sum(master_trip_2$ride_length>=1440)
+
 Summary :
 
 <= 0 mins ride_length removed, 1
 more than 1 day ride_length removed, 2
+
 Dataframe columns of master_trip_2, for visualization
 [1] "ride_id"            "rideable_type"      "started_at"         "ended_at"           "start_station_name"
 [6] "start_station_id"   "end_station_name"   "end_station_id"     "start_lat"          "start_lng"         
 [11] "end_lat"            "end_lng"            "member_casual"      "ride_length"        "day_of_week"       
 [16] "X"                  "X.1"                "X.2"                "date"               "day"               
 [21] "month"              "year"               "ride_length_mins"  
+
 Descriptive Stastistics, all members type are included
 mean(master_trip_2$ride_length_mins) 
 median(master_trip_2$ride_length_mins) 
 min(master_trip_2$ride_length_mins) 
 max(master_trip_2$ride_length_mins) 
+
 Result :
 
 Mean : 19.44
 Median : 11.95
 Min : 0.01
 Max : 1439.95
+
 Comparison of each member type ride length
 # Mean - Casual : 26.84 | Member : 13.36
 aggregate(master_trip_2$ride_length_mins~ master_trip_2$member_casual, FUN = mean)
@@ -97,6 +106,7 @@ aggregate(master_trip_2$ride_length_mins~ master_trip_2$member_casual, FUN = min
 
 # Max - Casual : 1439.91 | Member : 1439.95
 aggregate(master_trip_2$ride_length_mins~ master_trip_2$member_casual, FUN = max)
+
 Converting day_of_week from number to day
 master_trip_2$day_of_week <- ordered(master_trip_2$day_of_week, levels 
 = c("Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"))
