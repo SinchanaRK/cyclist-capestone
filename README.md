@@ -2,7 +2,7 @@
 ## 1st Case Study of Google Data Analytics Professional Certificate
 
 ### :clapper: Scenario
-You are a junior data analyst working in the marketing analyst team at Cyclistic, a bike-share company in Chicago. The director
+You are a junior data analyst working in the marketing analyst team at Cyclistic, a bike-share company in India. The director
 of marketing believes the company’s future success depends on maximizing the number of annual memberships. Therefore,
 your team wants to understand how casual riders and annual members use Cyclistic bikes differently. From these insights,
 your team will design a new marketing strategy to convert casual riders into annual members. But first, Cyclistic executives
@@ -36,12 +36,9 @@ Note: The datasets have a different name because Cyclistic is a fictional compan
 the datasets are appropriate and will enable you to answer the business questions. The data has been made available by
 Motivate International Inc. under this license.
 
-Data used : 
-- 2021, Month of 01-11
-- 2022, Month of 01
 
 Changes made :
-1. Mixing the 2021 and 2022 due to too many invalid data on 2021 month of 06-10, at the "started at" & "ended at" column's rows filled with "######". 
+1."started at" & "ended at" column's rows filled with "######". 
 2. Cleaning and Aggregate all of each month files into one file named "202102-202201_divvy-tripdata.csv"
 3. Added "ride_length" & "day_of_week" columns using "Google Spreadsheet'
 
